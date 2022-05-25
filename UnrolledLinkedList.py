@@ -54,10 +54,10 @@ class UnrolledLinkedList:
                     string += str(node.array[i])
                     string += ", "
                 node = node.next
-            for i in range(0, len(node)-1):
+            for i in range(0, len(node) - 1):
                 string += str(node.array[i])
                 string += ", "
-            string += str(node.array[len(node)-1])
+            string += str(node.array[len(node) - 1])
             string += "]"
             return string
 
@@ -90,7 +90,7 @@ class UnrolledLinkedList:
             return cur_node.array[n]
 
 
-def mcopy(orl): #返回一个和orl一样的unroll
+def mcopy(orl):  # 返回一个和orl一样的unroll
     if orl is None:
         return None
     else:
@@ -100,12 +100,11 @@ def mcopy(orl): #返回一个和orl一样的unroll
         cur_node = orl.head
         while cur_node is not None:
             newnode = Node()
-            newnode.len=cur_node.len
+            newnode.len = cur_node.len
             for i in range(len(cur_node)):
-                newnode.array[i]=cur_node.array[i]
-            cur_node=cur_node.next
+                newnode.array[i] = cur_node.array[i]
+            cur_node = cur_node.next
             newarry
-
 
 
 def cons(li, value):
