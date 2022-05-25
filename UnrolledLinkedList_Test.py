@@ -15,8 +15,8 @@ class TestUnrolledLinkedList(unittest.TestCase):
         l1 = cons(cons(empty, 1), None)
         l2 = cons(cons(empty, None), 1)
         self.assertEqual(str(empty), "[]")
-        self.assertEqual(str(l1), "[None, 1]")
-        self.assertEqual(str(l2), "[1, None]")
+        self.assertEqual(str(l1), "[1, None]")
+        self.assertEqual(str(l2), "[None, 1]")
         self.assertNotEqual(empty, l1)
         self.assertNotEqual(empty, l2)
         self.assertNotEqual(l1, l2)
@@ -30,33 +30,29 @@ class TestUnrolledLinkedList(unittest.TestCase):
         self.assertTrue(member(l1, None))
         self.assertTrue(member(l1, 1))
         self.assertFalse(member(l1, 2))
-        self.assertEqual(l1, reverse(l2))
-        self.assertEqual(to_list(l1), [None, 1])
-        self.assertEqual(l1, from_list([None, 1]))
-        self.assertEqual(concat(l1, l2), from_list([None, 1, 1, None]))
+        self.assertEqual(str(l1), str(reverse(l2)))
+        self.assertEqual(to_list(l1), [1, None])
+        self.assertEqual(str(l1), str(from_list([1, None])))
+        self.assertEqual(str(concat(l1, l2)), str(from_list([1, None, None, 1])))
         buf = []
         for e in l1:
             buf.append(e)
-        self.assertEqual(buf, [None, 1])
+        self.assertEqual(buf, [1, None])
         lst = to_list(l1) + to_list(l2)
         for e in l1:
             lst.remove(e)
         for e in l2:
             lst.remove(e)
         self.assertEqual(lst, [])
-        # and also you need:
-        # - filter(l, f)
-        # - map(l, f)
-        # - reduce(l, f)
-        # - empty()
+
 
     def test_filter(self):
         ull = UnrolledLinkedList()
-        for i in range(20):
+        for i in range(7):
             ull = cons(ull, i)
         res = filter(ull, lambda x: x % 3 == 0)
         dl = to_list(res)
-        self.assertEqual(dl, [1, 3, 5])
+        self.assertEqual(dl, [0, 3, 6])
 
     def test_map(self):
         ull = UnrolledLinkedList()

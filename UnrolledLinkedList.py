@@ -45,21 +45,20 @@ class UnrolledLinkedList:
         :return:
         """
         if self.len == 0:
-            return "empty"
+            return "[]"
         else:
-            string = "{"
+            string = "["
             node = self.head
-            while node is not None:
-                string += "["
+            while node.next is not None:
                 for i in range(0, len(node)):
                     string += str(node.array[i])
-                    if i + 1 < len(node):
-                        string += ", "
-                string += "]"
-                if node.next is not None:
                     string += ", "
                 node = node.next
-            string += "}"
+            for i in range(0, len(node)-1):
+                string += str(node.array[i])
+                string += ", "
+            string += str(node.array[len(node)-1])
+            string += "]"
             return string
 
     def __eq__(self, other):
@@ -91,6 +90,24 @@ class UnrolledLinkedList:
             return cur_node.array[n]
 
 
+def mcopy(orl): #返回一个和orl一样的unroll
+    if orl is None:
+        return None
+    else:
+        newarry = UnrolledLinkedList(orl.node_cap)
+        cur_node_new = Node()
+        newarry.head = cur_node_new
+        cur_node = orl.head
+        while cur_node is not None:
+            newnode = Node()
+            newnode.len=cur_node.len
+            for i in range(len(cur_node)):
+                newnode.array[i]=cur_node.array[i]
+            cur_node=cur_node.next
+            newarry
+
+
+
 def cons(li, value):
     """
     Add a new element by value
@@ -98,8 +115,6 @@ def cons(li, value):
     :param value: An element to be added
     :return:
     """
-    if li.node_cap <= 0:
-        raise ValueError("invalid capability")
     cop = deepcopy(li)
     if cop.head is None:
         cop.head = Node()
@@ -235,8 +250,8 @@ def from_list(lst):
     """
     l = UnrolledLinkedList()
     for element in lst:
-        new_list = cons(l, element)
-        new_list.len += 1
+        l = cons(l, element)
+        l.len += 1
     return l
 
 
@@ -267,14 +282,14 @@ def filter(li, predicate):
     :return: a new list contains the elements that fits
     """
     if li.head is None:
-        return "The unrolled linked list is empty."
+        return li
     else:
         x = UnrolledLinkedList()
         current = li.head
         while current is not None:
             for i in current.array:
                 if predicate(i):
-                    cons(x, i)
+                    x = cons(x, i)
             current = current.next
         return x
 
