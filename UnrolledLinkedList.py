@@ -164,7 +164,8 @@ def remove(li, value):
                         if len(cur_node.next) > cop.halfl:
                             for j in range(i, len(cur_node) - 1):
                                 cur_node.array[j] = cur_node.array[j + 1]
-                            cur_node.array[len(cur_node) - 1] = cur_node.next[0]
+                            cur_node.array[len(cur_node) - 1] = \
+                            cur_node.next[0]
                             for k in range(0, len(cur_node.next) - 1):
                                 cur_node.array[k] = cur_node.array[k + 1]
                             cur_node.next.len -= 1
@@ -247,11 +248,11 @@ def from_list(lst):
     :param lst: A list need to be converted.
     :return:
     """
-    l = UnrolledLinkedList()
+    ull = UnrolledLinkedList()
     for element in lst:
-        l = cons(l, element)
-        l.len += 1
-    return l
+        ull = cons(ull, element)
+        ull.len += 1
+    return ull
 
 
 def find(li, predicate):
