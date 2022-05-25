@@ -33,7 +33,9 @@ class TestUnrolledLinkedList(unittest.TestCase):
         self.assertEqual(str(l1), str(reverse(l2)))
         self.assertEqual(to_list(l1), [1, None])
         self.assertEqual(str(l1), str(from_list([1, None])))
-        self.assertEqual(str(concat(l1, l2)), str(from_list([1, None, None, 1])))
+        str1 = str(concat(l1, l2))
+        str2 = str(from_list([1, None, None, 1]))
+        self.assertEqual(str1, str2)
         buf = []
         for e in l1:
             buf.append(e)
@@ -44,7 +46,6 @@ class TestUnrolledLinkedList(unittest.TestCase):
         for e in l2:
             lst.remove(e)
         self.assertEqual(lst, [])
-
 
     def test_filter(self):
         ull = UnrolledLinkedList()
@@ -111,12 +112,9 @@ class TestUnrolledLinkedList(unittest.TestCase):
     #         arr.append(i)
     #     self.assertEqual(str(arr), "[1, 2, 3]")
 
-
-
     # @given(strategies.integers(), strategies.integers())
     # def test_add_commutative(self, a, b):
     #     self.assertEqual(Foo().add(a, b), Foo().add(b, a))
-
 
 # if __name__ == '__main__':
 #     unittest.main()
